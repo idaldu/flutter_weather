@@ -16,13 +16,14 @@ class MyApp extends StatelessWidget {
       title: 'flutter_weather',
       theme: ThemeData(
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
-            type: BottomNavigationBarType.fixed,
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            backgroundColor: Color(0xFFF0F0F0),
-            elevation: 0,
-            selectedItemColor: Colors.black,
-            unselectedItemColor: Colors.grey),
+          type: BottomNavigationBarType.fixed,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          backgroundColor: Color(0xFFF0F0F0),
+          elevation: 0,
+          selectedItemColor: Color(0xFF474747),
+          unselectedItemColor: Color(0xFFA7A7A7),
+        ),
       ),
       routes: {
         '/main': (context) => MainScreenWidget(),
@@ -31,7 +32,6 @@ class MyApp extends StatelessWidget {
       },
       initialRoute: '/main',
       onGenerateRoute: (settings) {
-
         return MaterialPageRoute<void>(
             builder: (context) => MainScreenWidget());
       },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_weather/app_image/resources.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key}) : super(key: key);
@@ -33,16 +34,19 @@ class _MainScreenWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _SliderControllerWidget(),
-        SizedBox(height: 50),
-        _MainWatherWidget(),
-        SizedBox(height: 25),
-        _MoreInfoWidget(),
-        SizedBox(height: 25),
-        _SunriseSunsetWigdet(),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        children: [
+          _SliderControllerWidget(),
+          SizedBox(height: 50),
+          _MainWatherWidget(),
+          SizedBox(height: 25),
+          _MoreInfoWidget(),
+          SizedBox(height: 25),
+          _SunriseSunsetWigdet(),
+        ],
+      ),
     );
   }
 }
@@ -55,7 +59,7 @@ class _SunriseSunsetWigdet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 327,
+      width: double.infinity,
       height: 229,
       decoration: BoxDecoration(
           color: Color(0xFFFFFFFF), borderRadius: BorderRadius.circular(11)),
@@ -65,20 +69,23 @@ class _SunriseSunsetWigdet extends StatelessWidget {
           Container(
             width: 290,
             height: 99,
-            child: Placeholder(),
+            child: Image(
+                image: AssetImage(
+              AppImages.sunrise,
+            )),
           ),
           Positioned(
-            top: 15,
+            top: 16,
             left: 20,
             child: Text('SUNRISE & SUNSET'),
           ),
           Positioned(
-            top: 180,
+            bottom: 41,
             left: 20,
             child: Text('Length of day: 13H 12M'),
           ),
           Positioned(
-            top: 199,
+            bottom: 23,
             left: 20,
             child: Text('Remaining daylight: 9H 22M'),
           ),
@@ -96,8 +103,7 @@ class _MoreInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 327,
-      height: 59,
+      height: 60,
       padding: EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
           color: Color(0xFFFFFFFF), borderRadius: BorderRadius.circular(11)),
@@ -158,60 +164,54 @@ class _MainWatherWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          _MainIconWidget(),
-          SizedBox(height: 12),
-          Container(
-            width: 180,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pushNamed('/detail');
-                    },
-                    child: Text(
-                      'Bishkek',
-                      style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.black),
-                    )),
-                Positioned(
-                  right: 0,
-                  child: Icon(Icons.arrow_circle_right),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 12),
-          Container(
-            width: 120,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Text(
-                  '31',
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        _MainIconWidget(),
+        SizedBox(height: 12),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/detail');
+                },
+                child: Text(
+                  'Hyderabad',
                   style: TextStyle(
-                    fontSize: 70,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                Positioned(
-                  right: 0,
-                  top: 0,
-                  child: Icon(
-                    Icons.donut_large_outlined,
-                    size: 13,
-                  ),
-                ),
-              ],
+                      fontSize: 30,
+                      height: 1.0,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black),
+                )),
+            Icon(Icons.arrow_circle_right),
+          ],
+        ),
+        SizedBox(height: 12),
+        Stack(
+          alignment: Alignment.centerLeft,
+          children: [
+            Text(
+              '31',
+              style: TextStyle(
+                fontSize: 70,
+                height: 1.0,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ),
             ),
-          ),
-        ],
-      ),
+            Positioned(
+              right: 0,
+              top: 0,
+              child: Icon(
+                Icons.donut_large_outlined,
+                size: 13,
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
@@ -226,7 +226,7 @@ class _MainIconWidget extends StatelessWidget {
     return Container(
       width: 123,
       height: 113,
-      child: Placeholder(),
+      child: Image(image: AssetImage(AppImages.weatherMain)),
     );
   }
 }

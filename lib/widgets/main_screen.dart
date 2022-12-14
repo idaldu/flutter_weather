@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_weather/icon/app_icons.dart';
 import 'package:flutter_weather/widgets/detail_screen/detail_screen_widget.dart';
 import 'package:flutter_weather/widgets/home_screen/home_screen_widget.dart';
 import 'package:flutter_weather/widgets/search_screen/search_screen_widget.dart';
@@ -38,26 +39,22 @@ class _MainScreenWidget extends State<MainScreenWidget> {
         child: _widgetOption[_selectedTab],
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 50),
         child: BottomNavigationBar(
           currentIndex: _selectedTab,
           iconSize: 25,
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(AppIcons.home_icon),
               label: 'Главная',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_month_rounded),
-              label: 'Детали',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.search),
+              icon: Icon(AppIcons.search_icon),
               label: 'Поиск',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Настройки',
+              icon: Icon(AppIcons.details_icon),
+              label: 'Детали',
             ),
           ],
           onTap: onSelectTab,
