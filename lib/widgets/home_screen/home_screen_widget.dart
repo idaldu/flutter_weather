@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather/app_image/resources.dart';
+import 'package:flutter_weather/theme/app_color.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key}) : super(key: key);
@@ -45,6 +46,7 @@ class _MainScreenWidget extends StatelessWidget {
           _MoreInfoWidget(),
           SizedBox(height: 25),
           _SunriseSunsetWigdet(),
+          SizedBox(height: 25),
         ],
       ),
     );
@@ -60,36 +62,47 @@ class _SunriseSunsetWigdet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 229,
       decoration: BoxDecoration(
           color: Color(0xFFFFFFFF), borderRadius: BorderRadius.circular(11)),
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Container(
-            width: 290,
-            height: 99,
-            child: Image(
-                image: AssetImage(
-              AppImages.sunrise,
-            )),
-          ),
-          Positioned(
-            top: 16,
-            left: 20,
-            child: Text('SUNRISE & SUNSET'),
-          ),
-          Positioned(
-            bottom: 41,
-            left: 20,
-            child: Text('Length of day: 13H 12M'),
-          ),
-          Positioned(
-            bottom: 23,
-            left: 20,
-            child: Text('Remaining daylight: 9H 22M'),
-          ),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'SUNRISE & SUNSET',
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                color: AppColors.textLight,
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            SizedBox(height: 31),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 19),
+              child: Image(image: AssetImage(AppImages.sunrise)),
+            ),
+            Text(
+              'Length of day: 13H 12M',
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                color: AppColors.textLight,
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            Text(
+              'Remaining daylight: 9H 22M',
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                color: AppColors.textLight,
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -103,54 +116,72 @@ class _MoreInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60,
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
           color: Color(0xFFFFFFFF), borderRadius: BorderRadius.circular(11)),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('TIME'),
-              SizedBox(
-                height: 8,
-              ),
-              Text('11:25 AM'),
-            ],
+          StatusCardItem(
+            title: 'TIME',
+            value: '11:25 AM',
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('UV'),
-              SizedBox(
-                height: 8,
-              ),
-              Text('4'),
-            ],
+          StatusCardItem(
+            title: 'UV',
+            value: '4',
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('% RAIN'),
-              SizedBox(
-                height: 8,
-              ),
-              Text('58%'),
-            ],
+          StatusCardItem(
+            title: '% RAIN',
+            value: '58%',
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('AQ'),
-              SizedBox(
-                height: 8,
-              ),
-              Text('22'),
-            ],
+          StatusCardItem(
+            title: 'AQ',
+            value: '22',
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class StatusCardItem extends StatelessWidget {
+  final String? title;
+  final String? value;
+
+  const StatusCardItem({
+    Key? key,
+    this.title,
+    this.value,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var mediaWidth = MediaQuery.of(context).size.width;
+    var elemWidth = ((mediaWidth - 56) / 4).floorToDouble();
+    return Container(
+      width: elemWidth,
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+                color: AppColors.textLight,
+                fontSize: 12,
+              ),
+              title ?? ''),
+          SizedBox(height: 4),
+          Text(
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+                color: AppColors.textGrey,
+                fontSize: 14,
+              ),
+              value ?? ''),
         ],
       ),
     );
@@ -165,48 +196,59 @@ class _MainWatherWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisSize: MainAxisSize.min,
       children: [
         _MainIconWidget(),
         SizedBox(height: 12),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed('/detail');
-                },
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 70),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
                 child: Text(
                   'Hyderabad',
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 30,
                       height: 1.0,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w700,
-                      color: Colors.black),
-                )),
-            Icon(Icons.arrow_circle_right),
-          ],
+                      color: AppColors.textGrey),
+                ),
+              ),
+              Image(image: AssetImage(AppImages.arrow)),
+            ],
+          ),
         ),
         SizedBox(height: 12),
         Stack(
-          alignment: Alignment.centerLeft,
+          alignment: Alignment.center,
           children: [
-            Text(
-              '31',
-              style: TextStyle(
-                fontSize: 70,
-                height: 1.0,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w500,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Text(
+                '31',
+                style: TextStyle(
+                  fontSize: 70,
+                  height: 1.0,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.textGrey,
+                ),
               ),
             ),
             Positioned(
               right: 0,
               top: 0,
-              child: Icon(
-                Icons.donut_large_outlined,
-                size: 13,
+              child: Container(
+                width: 7.5,
+                height: 7.5,
+                decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    border: Border.all(color: AppColors.textGrey, width: 2),
+                    borderRadius: BorderRadius.circular(100)),
               ),
             ),
           ],
