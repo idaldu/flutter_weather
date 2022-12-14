@@ -3,7 +3,6 @@ import 'package:flutter_weather/icon/app_icons.dart';
 import 'package:flutter_weather/widgets/detail_screen/detail_screen_widget.dart';
 import 'package:flutter_weather/widgets/home_screen/home_screen_widget.dart';
 import 'package:flutter_weather/widgets/search_screen/search_screen_widget.dart';
-import 'package:flutter_weather/widgets/settings_screen/settings_screen_widget.dart';
 
 class MainScreenWidget extends StatefulWidget {
   const MainScreenWidget({Key? key}) : super(key: key);
@@ -15,11 +14,10 @@ class MainScreenWidget extends StatefulWidget {
 class _MainScreenWidget extends State<MainScreenWidget> {
   int _selectedTab = 0;
 
-  static const List<Widget> _widgetOption = <Widget>[
+  static List<Widget> _widgetOption = <Widget>[
     HomeWidget(),
-    DetailScreenWidget(),
     SearchScreenWidget(),
-    SettingsScreenWidget(),
+    DetailScreenWidget(),
   ];
 
   void onSelectTab(int index) {
@@ -41,6 +39,10 @@ class _MainScreenWidget extends State<MainScreenWidget> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50),
         child: BottomNavigationBar(
+          selectedLabelStyle: TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: 12,
+          ),
           currentIndex: _selectedTab,
           iconSize: 25,
           items: [

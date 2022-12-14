@@ -12,17 +12,14 @@ class HomeWidget extends StatefulWidget {
 class _HomeWidgetState extends State<HomeWidget> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xFFF0F0F0),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        padding: EdgeInsets.only(top: 25),
-        child: ListView(
-          children: [
-            _MainScreenWidget(),
-          ],
-        ),
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      padding: EdgeInsets.only(top: 25),
+      child: ListView(
+        children: [
+          _MainScreenWidget(),
+        ],
       ),
     );
   }
