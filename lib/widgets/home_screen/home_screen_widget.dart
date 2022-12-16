@@ -227,6 +227,7 @@ class _MainWatherWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Text(
                 '31',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 70,
                   height: 1.0,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_weather/widgets/city_details/city_details_widget.dart';
 import 'package:flutter_weather/widgets/detail_screen/detail_screen_widget.dart';
 import 'package:flutter_weather/widgets/home_screen/home_screen_widget.dart';
 import 'package:flutter_weather/widgets/main_screen.dart';
@@ -29,6 +30,15 @@ class MyApp extends StatelessWidget {
         '/main': (context) => MainScreenWidget(),
         '/home': (context) => HomeWidget(),
         '/detail': (context) => DetailScreenWidget(),
+        '/search/city_details': (context) {
+          final arguments = ModalRoute.of(context)?.settings.arguments;
+
+          if (arguments is int) {
+            return CityDetailsWidget(cityId: arguments);
+          } else {
+            return CityDetailsWidget(cityId: 0);
+          }
+        }
       },
       initialRoute: '/main',
       onGenerateRoute: (settings) {

@@ -3,6 +3,7 @@ import 'package:flutter_weather/app_image/resources.dart';
 import 'package:flutter_weather/theme/app_color.dart';
 
 class WeatherCities {
+  final int id;
   final String imageName;
   final String weather;
   final String title;
@@ -10,6 +11,7 @@ class WeatherCities {
   final bool warning;
 
   WeatherCities({
+    required this.id,
     required this.imageName,
     required this.weather,
     required this.title,
@@ -28,6 +30,7 @@ class SearchScreenWidget extends StatefulWidget {
 class _SearchScreenWidgetState extends State<SearchScreenWidget> {
   final _weatherCities = <WeatherCities>[
     WeatherCities(
+      id: 1,
       imageName: AppImages.weatherCloudy,
       weather: 'Expecting Rainfall',
       title: 'Bishkek',
@@ -35,6 +38,7 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
       warning: true,
     ),
     WeatherCities(
+      id: 2,
       imageName: AppImages.weatherCloudy,
       weather: 'Expecting Rainfall',
       title: 'Balykchy',
@@ -42,6 +46,7 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
       warning: true,
     ),
     WeatherCities(
+      id: 3,
       imageName: AppImages.weatherCloudy,
       weather: 'Expecting Rainfall',
       title: 'Osh',
@@ -49,6 +54,7 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
       warning: true,
     ),
     WeatherCities(
+      id: 4,
       imageName: AppImages.weatherCloudy,
       weather: 'Expecting Rainfall',
       title: 'Batken',
@@ -56,6 +62,7 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
       warning: true,
     ),
     WeatherCities(
+      id: 5,
       imageName: AppImages.weatherCloudy,
       weather: 'Expecting Rainfall',
       title: 'Jalal-Abad',
@@ -63,6 +70,7 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
       warning: true,
     ),
     WeatherCities(
+      id: 6,
       imageName: AppImages.weatherCloudy,
       weather: 'Expecting Rainfall',
       title: 'Kant',
@@ -70,6 +78,7 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
       warning: true,
     ),
     WeatherCities(
+      id: 7,
       imageName: AppImages.weatherCloudy,
       weather: 'Expecting Rainfall',
       title: 'Kara-Balta',
@@ -77,6 +86,7 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
       warning: true,
     ),
     WeatherCities(
+      id: 8,
       imageName: AppImages.weatherCloudy,
       weather: 'Expecting Rainfall',
       title: 'Karakol',
@@ -88,7 +98,6 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
   var _filteredMovies = <WeatherCities>[];
 
   final _searchController = TextEditingController();
-  final _focusSearch = FocusNode();
 
   void _searchCity() {
     final quare = _searchController.text;
@@ -109,12 +118,20 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
     _searchController.addListener(_searchCity);
   }
 
+  void _onCityTap(int index) {
+    final id = _weatherCities[index].id;
+    Navigator.of(context).pushNamed(
+      '/search/city_details',
+      arguments: id,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         ListView.builder(
-          padding: EdgeInsets.only(top: 105),
+          padding: EdgeInsets.only(top: 95),
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           itemCount: _filteredMovies.length,
           itemExtent: 176,
@@ -217,7 +234,7 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
                     color: Colors.transparent,
                     child: InkWell(
                       borderRadius: BorderRadius.circular(11),
-                      onTap: () {},
+                      onTap: (() => _onCityTap(index)),
                     ),
                   )
                 ],
@@ -226,22 +243,34 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
           },
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 35),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
           child: TextField(
             controller: _searchController,
-            focusNode: _focusSearch,
             decoration: InputDecoration(
-              labelText: 'Searh',
-              labelStyle: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontSize: 15,
-                  fontWeight: FontWeight.w400,
-                  color: AppColors.textGrey),
-              filled: true,
-              fillColor: AppColors.CardWhite.withAlpha(200),
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
-            ),
+                labelText: 'Searh Location',
+                labelStyle: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 15,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.textLight),
+                suffixIcon: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 9),
+                  child: Image(image: AssetImage(AppImages.search)),
+                ),
+                isCollapsed: true,
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 20, vertical: 13),
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                filled: true,
+                fillColor: AppColors.CardWhite.withAlpha(235),
+                enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: BorderSide(color: AppColors.CardWhite)),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: BorderSide(color: AppColors.CardWhite)),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15))),
           ),
         )
       ],
