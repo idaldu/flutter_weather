@@ -14,11 +14,6 @@ class MainScreenWidget extends StatefulWidget {
 class _MainScreenWidget extends State<MainScreenWidget> {
   int _selectedTab = 0;
 
-  static List<Widget> _widgetOption = <Widget>[
-    HomeWidget(),
-    SearchScreenWidget(),
-    DetailScreenWidget(),
-  ];
 
   void onSelectTab(int index) {
     if (_selectedTab == index) return;
@@ -31,11 +26,11 @@ class _MainScreenWidget extends State<MainScreenWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFF0F0F0),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        child: _widgetOption[_selectedTab],
-      ),
+      body: IndexedStack(index: _selectedTab, children: [
+        HomeWidget(),
+        SearchScreenWidget(),
+        DetailScreenWidget(),
+      ]),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50),
         child: BottomNavigationBar(

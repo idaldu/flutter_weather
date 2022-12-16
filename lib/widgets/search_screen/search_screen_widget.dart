@@ -3,18 +3,18 @@ import 'package:flutter_weather/app_image/resources.dart';
 import 'package:flutter_weather/theme/app_color.dart';
 
 class WeatherCities {
-  final String? imageName;
-  final String? weather;
-  final String? city;
-  final String? temperature;
-  final bool? warning;
+  final String imageName;
+  final String weather;
+  final String title;
+  final String temperature;
+  final bool warning;
 
   WeatherCities({
-    this.imageName,
-    this.weather,
-    this.city,
-    this.temperature,
-    this.warning,
+    required this.imageName,
+    required this.weather,
+    required this.title,
+    required this.temperature,
+    required this.warning,
   });
 }
 
@@ -30,64 +30,77 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
     WeatherCities(
       imageName: AppImages.weatherCloudy,
       weather: 'Expecting Rainfall',
-      city: 'Bishkek',
+      title: 'Bishkek',
       temperature: '10',
       warning: true,
     ),
     WeatherCities(
       imageName: AppImages.weatherCloudy,
       weather: 'Expecting Rainfall',
-      city: 'Moscow',
+      title: 'Balykchy',
       temperature: '15',
       warning: true,
     ),
     WeatherCities(
       imageName: AppImages.weatherCloudy,
       weather: 'Expecting Rainfall',
-      city: 'Osh',
+      title: 'Osh',
       temperature: '17',
       warning: true,
     ),
     WeatherCities(
       imageName: AppImages.weatherCloudy,
       weather: 'Expecting Rainfall',
-      city: 'Kazan',
+      title: 'Batken',
       temperature: '18',
       warning: true,
     ),
     WeatherCities(
       imageName: AppImages.weatherCloudy,
       weather: 'Expecting Rainfall',
-      city: 'Novosibirsk',
+      title: 'Jalal-Abad',
       temperature: '-20',
       warning: true,
     ),
     WeatherCities(
       imageName: AppImages.weatherCloudy,
       weather: 'Expecting Rainfall',
-      city: 'Bryansk',
+      title: 'Kant',
       temperature: '30',
       warning: true,
     ),
     WeatherCities(
       imageName: AppImages.weatherCloudy,
       weather: 'Expecting Rainfall',
-      city: 'Chechnya',
+      title: 'Kara-Balta',
       temperature: '-16',
       warning: true,
     ),
     WeatherCities(
       imageName: AppImages.weatherCloudy,
       weather: 'Expecting Rainfall',
-      city: 'Vietnam',
+      title: 'Karakol',
       temperature: '20',
       warning: true,
     ),
   ];
 
-  final _searchController = TextEditingController();
+  var _filteredMovies = <WeatherCities>[];
 
-  void _searchCity() {}
+  final _searchController = TextEditingController();
+  final _focusSearch = FocusNode();
+
+  void _searchCity() {
+    final quare = _searchController.text;
+    if (quare.isNotEmpty) {
+      _filteredMovies = _weatherCities.where((WeatherCities city) {
+        return city.title.toLowerCase().contains(quare.toLowerCase());
+      }).toList();
+    } else {
+      _filteredMovies = <WeatherCities>[];
+    }
+    setState(() {});
+  }
 
   @override
   void initState() {
@@ -103,10 +116,10 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
         ListView.builder(
           padding: EdgeInsets.only(top: 105),
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          itemCount: _weatherCities.length,
+          itemCount: _filteredMovies.length,
           itemExtent: 176,
           itemBuilder: (BuildContext context, int index) {
-            final weatherData = _weatherCities[index];
+            final weatherData = _filteredMovies[index];
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: Stack(
@@ -124,7 +137,7 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
                           Column(
                             children: [
                               Text(
-                                weatherData.city ?? '',
+                                weatherData.title,
                                 overflow: TextOverflow.ellipsis,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
@@ -139,7 +152,7 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    weatherData.temperature ?? '',
+                                    weatherData.temperature,
                                     style: TextStyle(
                                       fontSize: 60,
                                       height: 1.0,
@@ -184,12 +197,10 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
                           ),
                           Column(
                             children: [
-                              Image(
-                                  image:
-                                      AssetImage(weatherData.imageName ?? '')),
+                              Image(image: AssetImage(weatherData.imageName)),
                               SizedBox(height: 19),
                               Text(
-                                weatherData.weather ?? '',
+                                weatherData.weather,
                                 style: TextStyle(
                                     fontFamily: 'Poppins',
                                     fontSize: 12,
@@ -218,6 +229,7 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 35),
           child: TextField(
             controller: _searchController,
+            focusNode: _focusSearch,
             decoration: InputDecoration(
               labelText: 'Searh',
               labelStyle: TextStyle(
