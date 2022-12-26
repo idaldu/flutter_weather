@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_weather/widgets/city_details/city_details_widget.dart';
-import 'package:flutter_weather/widgets/detail_screen/detail_screen_widget.dart';
-import 'package:flutter_weather/widgets/home_screen/home_screen_widget.dart';
-import 'package:flutter_weather/widgets/main_screen.dart';
+import 'package:flutter_weather/modules/search/ui/screens/city_details.dart';
+import 'package:flutter_weather/modules/details/ui/screens/detail_screen.dart';
+import 'package:flutter_weather/modules/home/ui/screens/home_screen.dart';
+import 'package:flutter_weather/modules/navigation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/main': (context) => MainScreenWidget(),
-        '/home': (context) => HomeWidget(),
+        '/home': (context) => HomeScreen(),
         '/detail': (context) => DetailScreenWidget(),
         '/search/city_details': (context) {
           final arguments = ModalRoute.of(context)?.settings.arguments;

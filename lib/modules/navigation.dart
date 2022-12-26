@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather/icon/app_icons.dart';
-import 'package:flutter_weather/widgets/detail_screen/detail_screen_widget.dart';
-import 'package:flutter_weather/widgets/home_screen/home_screen_widget.dart';
-import 'package:flutter_weather/widgets/search_screen/search_screen_widget.dart';
+import 'package:flutter_weather/modules/details/ui/screens/detail_screen.dart';
+import 'package:flutter_weather/modules/home/ui/screens/home_screen.dart';
+import 'package:flutter_weather/modules/search/ui/screens/search_screen.dart';
 
 class MainScreenWidget extends StatefulWidget {
   const MainScreenWidget({Key? key}) : super(key: key);
@@ -13,7 +13,6 @@ class MainScreenWidget extends StatefulWidget {
 
 class _MainScreenWidget extends State<MainScreenWidget> {
   int _selectedTab = 0;
-
 
   void onSelectTab(int index) {
     if (_selectedTab == index) return;
@@ -27,7 +26,7 @@ class _MainScreenWidget extends State<MainScreenWidget> {
     return Scaffold(
       backgroundColor: Color(0xFFF0F0F0),
       body: IndexedStack(index: _selectedTab, children: [
-        HomeWidget(),
+        HomeScreen(),
         SearchScreenWidget(),
         DetailScreenWidget(),
       ]),
