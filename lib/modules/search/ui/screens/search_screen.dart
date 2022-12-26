@@ -28,7 +28,7 @@ class SearchScreenWidget extends StatefulWidget {
 }
 
 class _SearchScreenWidgetState extends State<SearchScreenWidget> {
-  final _weatherCities = <WeatherCities>[
+  final weatherCities = <WeatherCities>[
     WeatherCities(
       id: 1,
       imageName: AppImages.weatherCloudy,
@@ -95,18 +95,18 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
     ),
   ];
 
-  var _filteredMovies = <WeatherCities>[];
+  var filteredCities = <WeatherCities>[];
 
   final _searchController = TextEditingController();
 
   void _searchCity() {
     final quare = _searchController.text;
     if (quare.isNotEmpty) {
-      _filteredMovies = _weatherCities.where((WeatherCities city) {
+      filteredCities = weatherCities.where((WeatherCities city) {
         return city.title.toLowerCase().contains(quare.toLowerCase());
       }).toList();
     } else {
-      _filteredMovies = <WeatherCities>[];
+      filteredCities = <WeatherCities>[];
     }
     setState(() {});
   }
@@ -118,8 +118,8 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
     _searchController.addListener(_searchCity);
   }
 
-  void _onCityTap(int index) {
-    final id = _weatherCities[index].id;
+  void onCityTap(int index) {
+    final id = weatherCities[index].id;
     Navigator.of(context).pushNamed(
       '/search/city_details',
       arguments: id,
@@ -133,10 +133,10 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
         ListView.builder(
           padding: EdgeInsets.only(top: 95),
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          itemCount: _filteredMovies.length,
+          itemCount: filteredCities.length,
           itemExtent: 176,
           itemBuilder: (BuildContext context, int index) {
-            final weatherData = _filteredMovies[index];
+            final weatherData = filteredCities[index];
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: Stack(
@@ -234,7 +234,7 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
                     color: Colors.transparent,
                     child: InkWell(
                       borderRadius: BorderRadius.circular(11),
-                      onTap: (() => _onCityTap(index)),
+                      onTap: (() => onCityTap(index)),
                     ),
                   )
                 ],
@@ -272,7 +272,7 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15))),
           ),
-        )
+        ),
       ],
     );
   }

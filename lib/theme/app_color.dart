@@ -5,4 +5,5 @@ class AppColors {
   static const textGrey = Color(0xFF474747);
   static const textOrange = Color(0xFFE39702);
   static const CardWhite = Color(0xFFFFFFFF);
+  static const backgroundApp = Color(0xFFF3F3F3);
 }

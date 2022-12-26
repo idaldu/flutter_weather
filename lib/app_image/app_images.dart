@@ -3,7 +3,9 @@ part of 'resources.dart';
 class AppImages {
   AppImages._();
 
+  static const String addCircle = 'assets/images/add_circle.png';
   static const String arrow = 'assets/images/arrow.png';
+  static const String arrowBack = 'assets/images/arrow_back.png';
   static const String ellipse = 'assets/images/ellipse.png';
   static const String search = 'assets/images/search.png';
   static const String sunrise = 'assets/images/sunrise.png';

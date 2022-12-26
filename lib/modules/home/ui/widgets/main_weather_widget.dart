@@ -3,25 +3,34 @@ import 'package:flutter_weather/app_image/resources.dart';
 import 'package:flutter_weather/theme/app_color.dart';
 
 class MainWeatherWidget extends StatelessWidget {
+  final String city;
+  final String temp;
+
   const MainWeatherWidget({
     Key? key,
+    required this.city,
+    required this.temp,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _MainIconWidget(),
+        Container(
+          width: 123,
+          height: 113,
+          child: Image(image: AssetImage(AppImages.weatherMain)),
+        ),
         SizedBox(height: 12),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 70),
+          padding: const EdgeInsets.symmetric(horizontal: 100),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: Text(
-                  'Hyderabad',
+                  city,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -43,7 +52,7 @@ class MainWeatherWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Text(
-                '31',
+                temp,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 70,
@@ -69,66 +78,6 @@ class MainWeatherWidget extends StatelessWidget {
           ],
         ),
       ],
-    );
-  }
-}
-
-class _MainIconWidget extends StatelessWidget {
-  const _MainIconWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 123,
-      height: 113,
-      child: Image(image: AssetImage(AppImages.weatherMain)),
-    );
-  }
-}
-
-class SliderControllerWidget extends StatelessWidget {
-  const SliderControllerWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        width: 80,
-        height: 22,
-        decoration: BoxDecoration(
-            color: Color(0xFFFFFFFF), borderRadius: BorderRadius.circular(5)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              width: 8,
-              height: 8,
-              decoration: BoxDecoration(
-                  color: Color(0xFFF0F0F0),
-                  borderRadius: BorderRadius.circular(100)),
-            ),
-            Container(
-              width: 8,
-              height: 8,
-              decoration: BoxDecoration(
-                  color: Color(0xFF2C2C2C),
-                  borderRadius: BorderRadius.circular(100)),
-            ),
-            Container(
-              width: 8,
-              height: 8,
-              decoration: BoxDecoration(
-                  color: Color(0xFFF0F0F0),
-                  borderRadius: BorderRadius.circular(100)),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
