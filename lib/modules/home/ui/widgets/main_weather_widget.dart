@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather/app_image/resources.dart';
+import 'package:flutter_weather/modules/home/ui/widgets/circle_stroke_widget.dart';
 import 'package:flutter_weather/theme/app_color.dart';
 
 class MainWeatherWidget extends StatelessWidget {
@@ -17,8 +18,6 @@ class MainWeatherWidget extends StatelessWidget {
     return Column(
       children: [
         Container(
-          width: 123,
-          height: 113,
           child: Image(image: AssetImage(AppImages.weatherMain)),
         ),
         SizedBox(height: 12),
@@ -41,7 +40,6 @@ class MainWeatherWidget extends StatelessWidget {
                       color: AppColors.textGrey),
                 ),
               ),
-              Image(image: AssetImage(AppImages.arrow)),
             ],
           ),
         ),
@@ -66,13 +64,11 @@ class MainWeatherWidget extends StatelessWidget {
             Positioned(
               right: 0,
               top: 0,
-              child: Container(
+              child: CircleStrokeWidget(
                 width: 7.5,
                 height: 7.5,
-                decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    border: Border.all(color: AppColors.textGrey, width: 2),
-                    borderRadius: BorderRadius.circular(100)),
+                borderWidth: 2,
+                color: AppColors.textGrey,
               ),
             ),
           ],

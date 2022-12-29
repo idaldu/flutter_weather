@@ -134,7 +134,7 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
           padding: EdgeInsets.only(top: 95),
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           itemCount: filteredCities.length,
-          itemExtent: 176,
+          itemExtent: 180,
           itemBuilder: (BuildContext context, int index) {
             final weatherData = filteredCities[index];
             return Padding(
@@ -143,7 +143,7 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: AppColors.CardWhite,
+                      color: AppColors.cardWhite,
                       borderRadius: BorderRadius.circular(11),
                     ),
                     child: Padding(
@@ -152,6 +152,7 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 weatherData.title,
@@ -193,6 +194,7 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
                               ),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Image(
                                     image: AssetImage(AppImages.warningIcon),
@@ -262,13 +264,13 @@ class _SearchScreenWidgetState extends State<SearchScreenWidget> {
                     EdgeInsets.symmetric(horizontal: 20, vertical: 13),
                 floatingLabelBehavior: FloatingLabelBehavior.never,
                 filled: true,
-                fillColor: AppColors.CardWhite.withAlpha(235),
+                fillColor: AppColors.cardWhite.withAlpha(235),
                 enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(color: AppColors.CardWhite)),
+                    borderSide: BorderSide(color: AppColors.cardWhite)),
                 focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(color: AppColors.CardWhite)),
+                    borderSide: BorderSide(color: AppColors.cardWhite)),
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15))),
           ),

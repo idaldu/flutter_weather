@@ -20,20 +20,20 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        padding: EdgeInsets.only(top: 25),
+        padding: EdgeInsets.only(top: 20),
         child: ListView(
           children: [
             SliderControllerWidget(),
-            SizedBox(height: 50),
+            SizedBox(height: 24),
             MainWeatherWidget(
               city: 'Bishkek',
               temp: '30',
             ),
-            SizedBox(height: 25),
+            SizedBox(height: 32),
             MoreInfoWidget(),
-            SizedBox(height: 25),
+            SizedBox(height: 16),
             SunriseSunsetWigdet(),
-            SizedBox(height: 25),
+            SizedBox(height: 16),
           ],
         ),
       ),
